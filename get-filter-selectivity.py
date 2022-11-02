@@ -1,6 +1,9 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
 import argparse
 import csv
 import torch
+import matplotlib.pyplot as plt
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--path-numbers', type=str, default="./vbench/collections/numbers.tsv",
@@ -18,6 +21,13 @@ parser.add_argument('--path-img-queries', type=str, default="./vbench/queries/im
 args = parser.parse_args()
 
 SIZE_COLLECTION = 330922
+
+def plot_selectivity_distribution(counts, title, path):
+    selectivities = [cnt / SIZE_COLLECTION for cnt in counts]
+    plt.hist(selectivities, 50)
+    plt.title(title)
+    plt.savefig(path)
+    plt.close()
 
 def get_or_selectivity():
     number_ingredients = []
@@ -42,6 +52,8 @@ def get_or_selectivity():
             counts.append(cnt)
         print(f"Selectivity of `or` filter: {(sum(counts) / len(counts)) / SIZE_COLLECTION}")
 
+        plot_selectivity_distribution(counts, "Selectivity Distribution of the Or Filter", "./data_gen/img/selectivity-distribution-or.png")
+
 def get_and_selectivity():
     texts = []
     with open(args.path_text, 'r', encoding="utf8") as f:
@@ -64,7 +76,9 @@ def get_and_selectivity():
                 print(f"{idx} queries searched...")
         print(f"Selectivity of `and` filter: {(sum(counts) / len(counts)) / SIZE_COLLECTION}")
 
-def get_range_selectivity():
+        plot_selectivity_distribution(counts, "Selectivity Distribution of the And Filter", "./data_gen/img/selectivity-distribution-and.png")
+
+def get_ranger_selectivity():
     im_vecs = []
     with open(args.path_img_embeddings, 'r', encoding="utf8") as f:
         tsvreader = csv.reader(f, delimiter="\t")
@@ -83,10 +97,12 @@ def get_range_selectivity():
             img_vec = [float(ele) for ele in img_vec[1:-1].split(', ')]
             img_vec = torch.Tensor(img_vec).to(device)  # [D]
             cosinesimilarity = torch.mm(img_vec.unsqueeze(0), im_vecs.transpose(0, 1))
-            counts.append(torch.sum(cosinesimilarity > 0.9).detach())
+            counts.append(torch.sum(cosinesimilarity > 0.9).detach().cpu())
         print(f"Selectivity of `Range R` filter: {(sum(counts) / len(counts)) / im_vecs.shape[0]}")
 
+        plot_selectivity_distribution(counts, "Selectivity Distribution of the RangeR Filter", "./data_gen/img/selectivity-distribution-ranger.png")
+
 if __name__ == "__main__":
-    # get_or_selectivity()
-    # get_and_selectivity()
-    get_range_selectivity()
+    get_or_selectivity()
+    get_and_selectivity()
+    get_ranger_selectivity()

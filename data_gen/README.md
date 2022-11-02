@@ -49,3 +49,16 @@ python3 text.py --path-result '../data/queries/text.tsv' --partition 'query' --j
 python3 or_filter_query.py
 python3 and_filter_query.py
 ```
+
+## Filter Analysis
+Get the selectivity distribution of the filters:
+
+```bash
+python get-filter-selectivity.py \
+--path-numbers '../VBench/Recipe1M/vbench/collections/numbers.tsv' \
+--path-text "../VBench/Recipe1M/vbench/collections/text.tsv" \
+--path-or-filter "../VBench/Recipe1M/vbench/queries/or_filter.tsv" \
+--path-and-filter "../VBench/Recipe1M/vbench/queries/and_filter.tsv" \
+--path-img-embeddings "../VBench/Recipe1M/vbench/collections/img_embeds_collection.tsv" \
+--path-img-queries "../VBench/Recipe1M/vbench/queries/img_embeds_query.tsv"
+```
