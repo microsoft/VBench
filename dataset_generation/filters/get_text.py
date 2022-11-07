@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--lmdb', dest='lmdb', default='../data')
 parser.add_argument('--json', dest='json', default='../data/layer1.json')
 parser.add_argument('--partition', dest='partition', default='query')
-parser.add_argument('--path-result', type=str, default="../data/queries/ingredients_keywords.tsv",
+parser.add_argument('--path-result', type=str, default="../vbench/queries/ingredients_keywords.tsv",
                     help='path to save result')
 opts = parser.parse_args()
 

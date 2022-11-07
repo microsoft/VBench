@@ -9,7 +9,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--path-embeddings', nargs='+',
                         help='path to embeddings')
-    parser.add_argument('--path-results', type=str, default="embedding/",
+    parser.add_argument('--path-results', type=str, default="vbench/",
                         help='path to save split result')
     parser.add_argument('--queries', type=int, default=0,
                         help='number of queries')
@@ -38,10 +38,10 @@ if __name__ == "__main__":
 
     print("Splitting...")
     idx = 0
-    with open(os.path.join(args.path_results, 'img_embeds_query.tsv'), 'w', encoding="utf8") as out_img_embeds_query, \
-            open(os.path.join(args.path_results, 'img_embeds_collection.tsv'), 'w', encoding="utf8") as out_img_embeds_collection, \
-            open(os.path.join(args.path_results, 'rec_embeds_query.tsv'), 'w', encoding="utf8") as out_rec_embeds_query, \
-            open(os.path.join(args.path_results, 'rec_embeds_collection.tsv'), 'w', encoding="utf8") as out_rec_embeds_collection:
+    with open(os.path.join(args.path_results, 'queries/img_embeds.tsv'), 'w', encoding="utf8") as out_img_embeds_query, \
+            open(os.path.join(args.path_results, 'collections/img_embeds.tsv'), 'w', encoding="utf8") as out_img_embeds_collection, \
+            open(os.path.join(args.path_results, 'queries/rec_embeds.tsv'), 'w', encoding="utf8") as out_rec_embeds_query, \
+            open(os.path.join(args.path_results, 'collections/rec_embeds.tsv'), 'w', encoding="utf8") as out_rec_embeds_collection:
 
         for im_vec, instr_vec in zip(im_vecs, instr_vecs):
             if idx in qids:

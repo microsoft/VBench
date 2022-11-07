@@ -9,7 +9,7 @@ In this repo, we provides instructions on
 
 VBench dataset consists of two tables: Recipe Table and Tag Table.
 
-Recipe Table
+- Recipe Table
 
 | Column Name           | Data Type      | Example                       | Notes                         |
 | --------------------- | -------------- | ----------------------------- | ----------------------------- |
@@ -22,7 +22,7 @@ Recipe Table
 | num_instructions      | Integer        | 5                             | number of instruction steps   |
 
 
-Tag Table
+- Tag Table
 
 | Column Name | Data Type  | Example                      | Notes                                       |
 | ----------- | ---------- | ---------------------------- | ------------------------------------------- |

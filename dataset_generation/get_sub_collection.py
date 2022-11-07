@@ -9,12 +9,14 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--path-collection', type=str, default="vbench/collections",
                         help='collection')
+    parser.add_argument('--size-subcollection', type=int, default=10000,
+                        help='size of subcollection')
     parser.add_argument('--path-result', type=str, default="vbench/collections/10k",
                         help='result')
     args = parser.parse_args()
 
     SIZE_COLLECTION = 330922
-    SIZE_SUBCOLLECTION = 10000
+    SIZE_SUBCOLLECTION = args.size_subcollection
 
     random.seed(0)
     lines_subcollection = random.sample(list(range(SIZE_COLLECTION)), SIZE_SUBCOLLECTION)

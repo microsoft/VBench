@@ -4,26 +4,24 @@ import argparse
 import csv
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--path-img-embeddings',type=str, default="../result/Recipe1M/split/img_embeds_collection.tsv",
+parser.add_argument('--path-img-embeddings',type=str, default="./vbench/collections/img_embeds.tsv",
                     help='path to img embeddings')
-parser.add_argument('--path-text-embeddings',type=str, default="../result/Recipe1M/split/rec_embeds_collection.tsv",
+parser.add_argument('--path-text-embeddings',type=str, default="./vbench/collections/rec_embeds.tsv",
                     help='path to text embeddings')
-parser.add_argument('--path-numbers',type=str, default="../result/Recipe1M/split/additional_data.tsv",
+parser.add_argument('--path-numbers',type=str, default="./vbench/numbers.tsv",
                     help='path to numbers')
-parser.add_argument('--path-text-data',type=str, default="../result/Recipe1M/split/additional_data.tsv",
+parser.add_argument('--path-text-data',type=str, default="./vbench/text.tsv",
                     help='path to text data')
-parser.add_argument('--path-img-queries', type=str, default="../result/Recipe1M/split/img_embeds_query.tsv",
+parser.add_argument('--path-img-queries', type=str, default="./vbench/queries/img_embeds.tsv",
                     help='path to img queries')
-parser.add_argument('--path-text-queries', type=str, default="../result/Recipe1M/split/rec_embeds_query.tsv",
+parser.add_argument('--path-text-queries', type=str, default="./vbench/queries/rec_embeds.tsv",
                     help='path to text queries')
-parser.add_argument('--path-query-filter', type=str, default="../result/Recipe1M/split/or_filter.tsv",
+parser.add_argument('--path-query-filter', type=str, default="./vbench/queries/or_filter.tsv",
                     help='path to queries filter')
-parser.add_argument('--path-query-and-filter', type=str, default="../result/Recipe1M/split/or_filter.tsv",
+parser.add_argument('--path-query-and-filter', type=str, default="./vbench/queries/and_filter.tsv",
                     help='path to queries and filter')
-parser.add_argument('--path-query-text', type=str, default="../result/Recipe1M/split/or_filter.tsv",
+parser.add_argument('--path-query-text', type=str, default="./vbench/queries/text.tsv",
                     help='path to queries text')
-parser.add_argument('--path-results', type=str, default="../result/Recipe1M/qrels-exact-top50.tsv",
-                    help='path to save exact result')
 args = parser.parse_args()
 
 qids = []

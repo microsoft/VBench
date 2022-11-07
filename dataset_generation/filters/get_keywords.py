@@ -11,9 +11,9 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--vocab', dest='vocab', default='../data/vocab.txt')
 parser.add_argument('--lmdb', dest='lmdb', default='../data')
 parser.add_argument('--partition', dest='partition', default='query')
-parser.add_argument('--path-result-keywords', type=str, default="../data/queries/keywords.tsv",
+parser.add_argument('--path-result-keywords', type=str, default="../vbench/queries/keywords.tsv",
                     help='path to save result')
-parser.add_argument('--path-result-numbers', type=str, default="../data/queries/numbers.tsv",
+parser.add_argument('--path-result-numbers', type=str, default="../vbench/queries/numbers.tsv",
                     help='path to save result')
 opts = parser.parse_args()
 

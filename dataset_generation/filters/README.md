@@ -21,11 +21,11 @@ bash ./generate_filters.sh
 Get the selectivity distribution of the filters:
 
 ```bash
-python get-filter-selectivity.py \
---path-numbers '../VBench/Recipe1M/vbench/collections/numbers.tsv' \
---path-text "../VBench/Recipe1M/vbench/collections/text.tsv" \
---path-or-filter "../VBench/Recipe1M/vbench/queries/or_filter.tsv" \
---path-and-filter "../VBench/Recipe1M/vbench/queries/and_filter.tsv" \
---path-img-embeddings "../VBench/Recipe1M/vbench/collections/img_embeds_collection.tsv" \
---path-img-queries "../VBench/Recipe1M/vbench/queries/img_embeds_query.tsv"
+python get_filter_selectivity.py \
+--path-numbers '../vbench/collections/numbers.tsv' \
+--path-text "../vbench/collections/text.tsv" \
+--path-or-filter "../vbench/queries/or_filter.tsv" \
+--path-and-filter "../vbench/queries/and_filter.tsv" \
+--path-img-embeddings "../vbench/collections/img_embeds.tsv" \
+--path-img-queries "../vbench/queries/img_embeds.tsv"
 ```
