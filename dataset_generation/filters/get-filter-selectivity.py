@@ -52,7 +52,7 @@ def get_or_selectivity():
             counts.append(cnt)
         print(f"Selectivity of `or` filter: {(sum(counts) / len(counts)) / SIZE_COLLECTION}")
 
-        plot_selectivity_distribution(counts, "Selectivity Distribution of the Or Filter", "./data_gen/img/selectivity-distribution-or.png")
+        plot_selectivity_distribution(counts, "Selectivity Distribution of the Or Filter", "./filter_generation/img/selectivity-distribution-or.png")
 
 def get_and_selectivity():
     texts = []
@@ -76,7 +76,7 @@ def get_and_selectivity():
                 print(f"{idx} queries searched...")
         print(f"Selectivity of `and` filter: {(sum(counts) / len(counts)) / SIZE_COLLECTION}")
 
-        plot_selectivity_distribution(counts, "Selectivity Distribution of the And Filter", "./data_gen/img/selectivity-distribution-and.png")
+        plot_selectivity_distribution(counts, "Selectivity Distribution of the And Filter", "./filter_generation/img/selectivity-distribution-and.png")
 
 def get_ranger_selectivity():
     im_vecs = []
@@ -100,7 +100,7 @@ def get_ranger_selectivity():
             counts.append(torch.sum(cosinesimilarity > 0.9).detach().cpu())
         print(f"Selectivity of `Range R` filter: {(sum(counts) / len(counts)) / im_vecs.shape[0]}")
 
-        plot_selectivity_distribution(counts, "Selectivity Distribution of the RangeR Filter", "./data_gen/img/selectivity-distribution-ranger.png")
+        plot_selectivity_distribution(counts, "Selectivity Distribution of the RangeR Filter", "./filter_generation/img/selectivity-distribution-ranger.png")
 
 if __name__ == "__main__":
     get_or_selectivity()
