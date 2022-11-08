@@ -25,8 +25,7 @@ LIMIT K;
 SELECT recipe_id,
     COSINE_DISTANCE(images_embedding, p_images_embedding) AS d,
 FROM Recipe
-WHERE  (p_num_ingredients <= num_ingredients)
-  OR (p_num_instructions <= num_instructions)
+WHERE  p_num_instructions <= num_instructions
 ORDER BY d
 LIMIT K;
 
@@ -35,8 +34,7 @@ SELECT recipe_id,
     COSINE_DISTANCE(images_embedding, p_images_embedding) AS d1,
     COSINE_DISTANCE(description_embedding, p_description_embedding) AS d2
 FROM Recipe
-WHERE  (p_num_ingredients <= num_ingredients)
-  OR (p_num_instructions <= num_instructions)
+WHERE  p_num_instructions <= num_instructions
 ORDER BY d1 * WEIGHT + d2
 LIMIT K;
 
@@ -45,8 +43,7 @@ SELECT recipe_id,
     COSINE_DISTANCE(description_embedding, p_description_embedding) AS d1,
     BM25_DISTANCE(description, p_description) AS d2
 FROM Recipe
-WHERE  (p_num_ingredients <= num_ingredients)
-  OR (p_num_instructions <= num_instructions)
+WHERE  p_num_instructions <= num_instructions
 ORDER BY d1 * WEIGHT + d2 
 LIMIT K;
 
@@ -54,8 +51,7 @@ LIMIT K;
 SELECT recipe_id,
     COSINE_DISTANCE(images_embedding, p_images_embedding) AS d,
 FROM Recipe
-WHERE (ingredients LIKE "%p_ingredients_1%")
- AND (ingredients NOT LIKE "%p_ingredients_2%")
+WHERE description NOT LIKE "%p_ingredients%"
 ORDER BY d
 LIMIT K;
 
@@ -64,8 +60,7 @@ SELECT recipe_id,
     COSINE_DISTANCE(images_embedding, p_images_embedding) AS d1,
     COSINE_DISTANCE(description_embedding, p_description_embedding) AS d2
 FROM Recipe
-WHERE (ingredients LIKE "%p_ingredients_1%")
- AND (ingredients NOT LIKE "%p_ingredients_2%")
+WHERE description NOT LIKE "%p_ingredients%"
 ORDER BY d1 * WEIGHT + d2
 LIMIT K;
 
@@ -74,8 +69,7 @@ SELECT recipe_id,
     COSINE_DISTANCE(description_embedding, p_description_embedding) AS d1,
     BM25_DISTANCE(description, p_description) AS d2
 FROM Recipe
-WHERE (ingredients LIKE "%p_ingredients_1%")
- AND (ingredients NOT LIKE "%p_ingredients_2%")
+WHERE description NOT LIKE "%p_ingredients%"
 ORDER BY d1 * WEIGHT + d2 
 LIMIT K;
 
