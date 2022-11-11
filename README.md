@@ -18,8 +18,7 @@ VBench dataset consists of two tables: Recipe Table and Tag Table.
 | description           | Text           | [ingredients] + [instruction] | sparse vector                 |
 | images_embedding      | Vector         | [-0.0421, 0.0296, ...,0.0273] | dense vector, 1024 dimensions |
 | description_embedding | Vector         | [0.0056,-0.0487,..., 0.0034]  | dense vect, 1024 dimensions   |
-| num_ingredients       | Integer        | 3                             | number of ingredients         |
-| num_instructions      | Integer        | 5                             | number of instruction steps   |
+| price                 | Integer        | 18                            | price of the dish             |
 
 
 - Tag Table

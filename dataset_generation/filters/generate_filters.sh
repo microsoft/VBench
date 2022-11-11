@@ -17,6 +17,10 @@ python3 get_keywords.py --partition 'query' --path-result-keywords "../vbench/qu
 python3 get_text.py --path-result '../vbench/collections/text.tsv' --partition 'collection' --json '../data/layer1.json'
 python3 get_text.py --path-result '../vbench/queries/text.tsv' --partition 'query' --json '../data/layer1.json'
 
+# get price
+python3 generate_price.py --path-result '../vbench/collections/price.tsv' --partition 'collection'
+python3 generate_price.py --path-result '../vbench/queries/price.tsv' --partition 'query'
+
 # generate scalar filters
-python3 generate_numeric_filters.py
+# python3 generate_numeric_filters.py
 python3 generate_string_filters.py

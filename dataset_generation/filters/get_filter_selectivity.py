@@ -10,7 +10,7 @@ parser.add_argument('--path-numbers', type=str, default="../vbench/collections/n
                     help='path to number data')
 parser.add_argument('--path-text', type=str, default="../vbench/collections/text.tsv",
                     help='path to text data')
-parser.add_argument('--path-numeric-filter', type=str, default="../vbench/queries/numeric_filter_new.tsv",
+parser.add_argument('--path-numeric-filter', type=str, default="../vbench/queries/price.tsv",
                     help='path to queries filter')
 parser.add_argument('--path-string-filter', type=str, default="../vbench/queries/string_filter.tsv",
                     help='path to queries filter')

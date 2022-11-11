@@ -25,7 +25,7 @@ LIMIT K;
 SELECT recipe_id,
     COSINE_DISTANCE(images_embedding, p_images_embedding) AS d,
 FROM Recipe
-WHERE  p_num_instructions <= num_instructions
+WHERE  p_price <= price
 ORDER BY d
 LIMIT K;
 
@@ -34,7 +34,7 @@ SELECT recipe_id,
     COSINE_DISTANCE(images_embedding, p_images_embedding) AS d1,
     COSINE_DISTANCE(description_embedding, p_description_embedding) AS d2
 FROM Recipe
-WHERE  p_num_instructions <= num_instructions
+WHERE  p_price <= price
 ORDER BY d1 * WEIGHT + d2
 LIMIT K;
 
@@ -43,7 +43,7 @@ SELECT recipe_id,
     COSINE_DISTANCE(description_embedding, p_description_embedding) AS d1,
     BM25_DISTANCE(description, p_description) AS d2
 FROM Recipe
-WHERE  p_num_instructions <= num_instructions
+WHERE  p_price <= price
 ORDER BY d1 * WEIGHT + d2 
 LIMIT K;
 
