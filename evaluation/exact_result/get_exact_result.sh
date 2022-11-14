@@ -1,113 +1,128 @@
-# dense
-python get-dense-exact-result.py \
+# cd Recipe1M
+
+PATH_COLLECTION="./vbench/collections/"
+PATH_QUERY="./vbench/queries/"
+PATH_RESULT="./vbench/exact/"
+# PATH_COLLECTION="./vbench/collections/10k/"
+# PATH_RESULT="./vbench/exact/10k/"
+
+# Q1
+python get_dense_exact_result.py \
 --filter 'no' \
 --k 50 \
 --log-frequency 100 \
---path-img-embeddings "./vbench/collections/img_embeds_collection.tsv" \
---path-number-data "./vbench/collections/numbers.tsv" \
---path-text-data "./vbench/collections/text.tsv" \
---path-img-queries "./vbench/queries/img_embeds_query.tsv" \
---path-query-filter "./vbench/queries/or_filter.tsv" \
---path-results "./vbench/exact/dense-top50.tsv"
-
-# dense + or filterdense
-python get-dense-exact-result.py \
---filter 'or' \
---k 50 \
---log-frequency 100 \
---path-img-embeddings "./vbench/collections/img_embeds_collection.tsv" \
---path-number-data "./vbench/collections/numbers.tsv" \
---path-text-data "./vbench/collections/text.tsv" \
---path-img-queries "./vbench/queries/img_embeds_query.tsv" \
---path-query-filter "./vbench/queries/or_filter.tsv" \
---path-results "./vbench/exact/dense-or-top50.tsv"
-
-# dense + and filter
-python get-dense-exact-result.py \
---filter 'and' \
---k 50 \
---log-frequency 100 \
---path-img-embeddings "./vbench/collections/img_embeds_collection.tsv" \
---path-number-data "./vbench/collections/numbers.tsv" \
---path-text-data "./vbench/collections/text.tsv" \
---path-img-queries "./vbench/queries/img_embeds_query.tsv" \
---path-query-filter "./vbench/queries/and_filter.tsv" \
---path-results "./vbench/exact/dense-and-top50.tsv"
-
-# multi vector + no filter
-python get-multi-dense-filter-exact-result.py \
---filter 'no' \
---k 50 \
---log-frequency 100 \
---path-img-embeddings "./vbench/collections/img_embeds_collection.tsv" \
---path-embeds-text "./vbench/collections/rec_embeds_collection.tsv" \
---path-number-data "./vbench/collections/numbers.tsv" \
---path-text-data "./vbench/collections/text.tsv" \
---path-img-queries "./vbench/queries/img_embeds_query.tsv" \
---path-text-queries "./vbench/queries/rec_embeds_query.tsv" \
---path-query-filter "./vbench/queries/or_filter.tsv" \
---path-results "./vbench/exact/qrels-multi-dense-no-filter-exact-top50.tsv" \
+--path-img-embeddings "${PATH_COLLECTION}img_embeds_collection.tsv" \
+--path-number-data "${PATH_COLLECTION}numbers.tsv" \
+--path-text-data "${PATH_COLLECTION}text.tsv" \
+--path-img-queries "${PATH_QUERY}img_embeds_query.tsv" \
+--path-query-filter "${PATH_QUERY}price.tsv" \
+--path-results "${PATH_RESULT}dense-top50.tsv" \
 --start-line 0 \
 --end-line 10000
 
-# multi vector + or filter
-python get-multi-dense-filter-exact-result.py \
---filter 'or' \
+# Q4
+python get_dense_exact_result.py \
+--filter 'number' \
 --k 50 \
 --log-frequency 100 \
---path-img-embeddings "./vbench/collections/img_embeds_collection.tsv" \
---path-embeds-text "./vbench/collections/rec_embeds_collection.tsv" \
---path-number-data "./vbench/collections/numbers.tsv" \
---path-text-data "./vbench/collections/text.tsv" \
---path-img-queries "./vbench/queries/img_embeds_query.tsv" \
---path-text-queries "./vbench/queries/rec_embeds_query.tsv" \
---path-query-filter "./vbench/queries/or_filter.tsv" \
---path-results "./vbench/exact/qrels-multi-dense-or-filter-exact-top50.tsv" \
+--path-img-embeddings "${PATH_COLLECTION}img_embeds_collection.tsv" \
+--path-number-data "${PATH_COLLECTION}numbers.tsv" \
+--path-text-data "${PATH_COLLECTION}text.tsv" \
+--path-img-queries "${PATH_QUERY}img_embeds_query.tsv" \
+--path-query-filter "${PATH_QUERY}price.tsv" \
+--path-results "${PATH_RESULT}dense-or-top50.tsv" \
 --start-line 0 \
 --end-line 10000
 
-# multi vector + and filter
-python get-multi-dense-filter-exact-result.py \
---filter 'and' \
+# Q7
+python get_dense_exact_result.py \
+--filter 'string' \
 --k 50 \
 --log-frequency 100 \
---path-img-embeddings "./vbench/collections/img_embeds_collection.tsv" \
---path-embeds-text "./vbench/collections/rec_embeds_collection.tsv" \
---path-number-data "./vbench/collections/numbers.tsv" \
---path-text-data "./vbench/collections/text.tsv" \
---path-img-queries "./vbench/queries/img_embeds_query.tsv" \
---path-text-queries "./vbench/queries/rec_embeds_query.tsv" \
---path-query-filter "./vbench/queries/and_filter.tsv" \
---path-results "./vbench/exact/qrels-multi-dense-and-filter-exact-top50.tsv"
+--path-img-embeddings "${PATH_COLLECTION}img_embeds_collection.tsv" \
+--path-number-data "${PATH_COLLECTION}numbers.tsv" \
+--path-text-data "${PATH_COLLECTION}text.tsv" \
+--path-img-queries "${PATH_QUERY}img_embeds_query.tsv" \
+--path-query-filter "${PATH_QUERY}string_filter.tsv" \
+--path-results "${PATH_RESULT}dense-and-top50.tsv" \
+--start-line 0 \
+--end-line 10000
 
-# dense + sparse
-python get-dense-sparse-exact-result.py \
+# Q2
+python get_multi_dense_exact_result.py \
 --filter 'no' \
---path-query "./vbench/queries/text.tsv" \
---path-query-embeds "./vbench/queries/img_embeds_query.tsv" \
---inverted-index-key "text" \
---knn-key "embeds_image" \
---knn-weight 50 --k 50 \
---path-exact-result "./vbench/exact/dense-sparse-top50.tsv"
+--k 50 \
+--log-frequency 100 \
+--path-img-embeddings "${PATH_COLLECTION}img_embeds_collection.tsv" \
+--path-text-embeddings "${PATH_COLLECTION}rec_embeds_collection.tsv" \
+--path-number-data "${PATH_COLLECTION}numbers.tsv" \
+--path-text-data "${PATH_COLLECTION}text.tsv" \
+--path-img-queries "${PATH_QUERY}img_embeds_query.tsv" \
+--path-text-queries "${PATH_QUERY}rec_embeds_query.tsv" \
+--path-results "${PATH_RESULT}qrels-multi-dense-no-filter-exact-top50.tsv" \
+--start-line 0 \
+--end-line 10000
 
-# dense + sparse + or filter
-python get-dense-sparse-exact-result.py \
---filter 'or' \
---path-query-embeds "./vbench/queries/img_embeds_query.tsv" \
---path-query-text "./vbench/queries/text.tsv" \
---path-query-filter "./vbench/queries/or_filter.tsv" \
---inverted-index-key "text" \
---knn-key "embeds_image" \
---knn-weight 50 --k 50 \
---path-exact-result "./vbench/exact/dense-sparse-or-top50.tsv"
+# Q5
+python get_multi_dense_exact_result.py \
+--filter 'number' \
+--k 50 \
+--log-frequency 100 \
+--path-img-embeddings "${PATH_COLLECTION}img_embeds_collection.tsv" \
+--path-text-embeddings "${PATH_COLLECTION}rec_embeds_collection.tsv" \
+--path-number-data "${PATH_COLLECTION}numbers.tsv" \
+--path-text-data "${PATH_COLLECTION}text.tsv" \
+--path-img-queries "${PATH_QUERY}img_embeds_query.tsv" \
+--path-text-queries "${PATH_QUERY}rec_embeds_query.tsv" \
+--path-query-filter "${PATH_QUERY}price.tsv" \
+--path-results "${PATH_RESULT}qrels-multi-dense-or-filter-exact-top50.tsv" \
+--start-line 0 \
+--end-line 10000
 
-# dense + sparse + and filter
-python get-dense-sparse-exact-result.py \
---filter 'and' \
---path-query-embeds "./vbench/queries/img_embeds_query.tsv" \
---path-query-text "./vbench/queries/text.tsv" \
---path-query-filter "./vbench/queries/and_filter.tsv" \
+# Q8
+python get_multi_dense_exact_result.py \
+--filter 'string' \
+--k 50 \
+--log-frequency 100 \
+--path-img-embeddings "${PATH_COLLECTION}img_embeds_collection.tsv" \
+--path-text-embeddings "${PATH_COLLECTION}rec_embeds_collection.tsv" \
+--path-number-data "${PATH_COLLECTION}numbers.tsv" \
+--path-text-data "${PATH_COLLECTION}text.tsv" \
+--path-img-queries "${PATH_QUERY}img_embeds_query.tsv" \
+--path-text-queries "${PATH_QUERY}rec_embeds_query.tsv" \
+--path-query-filter "${PATH_QUERY}string_filter.tsv" \
+--path-results "${PATH_RESULT}multi-dense-and-filter-exact-top50.tsv" \
+--start-line 0 \
+--end-line 10000
+
+# Q3
+python get_dense_sparse_exact_result.py \
+--filter 'no' \
+--path-query-text "${PATH_QUERY}text.tsv" \
+--path-query-embeds "${PATH_QUERY}img_embeds_query.tsv" \
 --inverted-index-key "text" \
 --knn-key "embeds_image" \
 --knn-weight 50 --k 50 \
---path-exact-result "./vbench/exact/dense-sparse-and-top50.tsv"
+--path-exact-result "${PATH_RESULT}dense-sparse-top50.tsv"
+
+# Q6
+python get_dense_sparse_exact_result.py \
+--filter 'number' \
+--path-query-embeds "${PATH_QUERY}img_embeds_query.tsv" \
+--path-query-text "${PATH_QUERY}text.tsv" \
+--path-query-filter "${PATH_QUERY}price.tsv" \
+--inverted-index-key "text" \
+--knn-key "embeds_image" \
+--knn-weight 50 --k 50 \
+--path-exact-result "${PATH_RESULT}dense-sparse-or-top50.tsv"
+
+# Q9
+python get_dense_sparse_exact_result.py \
+--filter 'string' \
+--path-query-embeds "${PATH_QUERY}img_embeds_query.tsv" \
+--path-query-text "${PATH_QUERY}text.tsv" \
+--path-query-filter "${PATH_QUERY}string_filter.tsv" \
+--inverted-index-key "text" \
+--knn-key "embeds_image" \
+--knn-weight 50 --k 50 \
+--path-exact-result "${PATH_RESULT}dense-sparse-and-top50.tsv"

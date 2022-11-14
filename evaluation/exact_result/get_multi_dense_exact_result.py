@@ -24,7 +24,7 @@ if __name__ == "__main__":
                         help='path to img queries')
     parser.add_argument('--path-text-queries', type=str, default="./data/vbench/queries/rec_embeds_query.tsv",
                         help='path to text queries')
-    parser.add_argument('--path-query-filter', type=str, default="./data/vbench/queries/or_filter.tsv",
+    parser.add_argument('--path-query-filter', type=str, default="./data/vbench/queries/price.tsv",
                         help='path to queries filter')
     parser.add_argument('--path-results', type=str, default="./qrels-exact-top50.tsv",
                         help='path to save exact result')

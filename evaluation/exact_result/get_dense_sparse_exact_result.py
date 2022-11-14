@@ -234,7 +234,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--filter', type=str, default='no',
                         help='no, or, and')
-    parser.add_argument('--path-query-filter', type=str, default="./data/vbench/queries/or_filter.tsv",
+    parser.add_argument('--path-query-filter', type=str, default="./data/vbench/queries/price.tsv",
                         help='path to queries filter')
     parser.add_argument('--path-query-text', type=str, default='./data/vbench/queries/text.tsv',
                         help='path to query')

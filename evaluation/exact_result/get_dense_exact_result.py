@@ -8,7 +8,7 @@ import torch
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--filter', type=str, default='no',
-                        help='no, or, and')
+                        help='no, number, string')
     parser.add_argument('--k', type=int, default=50,
                         help='top k')
     parser.add_argument('--path-img-embeddings', type=str, default="./data/vbench/collections/img_embeds_collection.tsv",
@@ -19,7 +19,7 @@ if __name__ == "__main__":
                         help='path to text data')
     parser.add_argument('--path-img-queries', type=str, default="./data/vbench/queries/img_embeds_query.tsv",
                         help='path to img queries')
-    parser.add_argument('--path-query-filter', type=str, default="./data/vbench/queries/or_filter.tsv",
+    parser.add_argument('--path-query-filter', type=str, default="./data/vbench/queries/price.tsv",
                         help='path to queries filter')
     parser.add_argument('--path-results', type=str, default="./qrels-exact-top50.tsv",
                         help='path to save exact result')
@@ -66,7 +66,7 @@ if __name__ == "__main__":
             open(os.path.join(args.path_results), 'w', encoding="utf8") as out:
         query_image = csv.reader(f_query_image, delimiter="\t")
         query_filter = csv.reader(f_query_filter, delimiter="\t")
-        for idx, ((qid, img_vec), (_, filter1, filter2)) in enumerate(zip(query_image, query_filter)):
+        for idx, ((qid, img_vec), (_, filter1)) in enumerate(zip(query_image, query_filter)):
             if idx < args.start_line:
                 continue
             if idx > args.end_line:
@@ -74,17 +74,16 @@ if __name__ == "__main__":
             img_vec = [float(ele) for ele in img_vec[1:-1].split(', ')]
             img_vec = torch.Tensor(img_vec).to(device)  # [D]
             cosinesimilarity = torch.mm(img_vec.unsqueeze(0), im_vecs.transpose(0, 1))
-            if args.filter == 'or':
-                filter1 = int(filter1)
-                filter2 = int(filter2)
-                cosinesimilarity[torch.logical_and(number_ingredients > filter1, number_instructions > filter2)] = -2
-            elif args.filter == 'and':
+            if args.filter == 'number':
+                price = int(filter1)
+                cosinesimilarity[number_ingredients > price] = -2
+            elif args.filter == 'string':
                 ingre_bool = []
                 with open(args.path_text_data, 'r', encoding="utf8") as f:
                     tsvreader = csv.reader(f, delimiter="\t")
                     for _, ingredients, instructions in tsvreader:
                         text = ingredients + instructions
-                        if filter1.replace('_', ' ') in text and filter2.replace('_', ' ') not in text:
+                        if filter1.replace('_', ' ') not in text:
                             ingre_bool.append(True)
                         else:
                             ingre_bool.append(False)
