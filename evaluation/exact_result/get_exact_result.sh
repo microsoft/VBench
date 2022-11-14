@@ -31,17 +31,17 @@ PATH_RESULT="./vbench/exact/"
 # --end-line 10000
 
 # Q7
-python get_dense_exact_result.py \
---filter 'string' \
---k 50 \
---log-frequency 100 \
---path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
---path-text-data "${PATH_COLLECTION}text.tsv" \
---path-img-queries "${PATH_QUERY}img_embeds.tsv" \
---path-query-filter "${PATH_QUERY}string_filter.tsv" \
---path-results "${PATH_RESULT}q7.tsv" \
---start-line 0 \
---end-line 10000
+# python get_dense_exact_result.py \
+# --filter 'string' \
+# --k 50 \
+# --log-frequency 100 \
+# --path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
+# --path-text-data "${PATH_COLLECTION}text.tsv" \
+# --path-img-queries "${PATH_QUERY}img_embeds.tsv" \
+# --path-query-filter "${PATH_QUERY}string_filter.tsv" \
+# --path-results "${PATH_RESULT}q7.tsv" \
+# --start-line 0 \
+# --end-line 10000
 
 # Q2
 python get_multi_dense_exact_result.py \
@@ -57,34 +57,34 @@ python get_multi_dense_exact_result.py \
 --end-line 10000
 
 # Q5
-python get_multi_dense_exact_result.py \
---filter 'number' \
---k 50 \
---log-frequency 100 \
---path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
---path-text-embeddings "${PATH_COLLECTION}rec_embeds.tsv" \
---path-number-data "${PATH_COLLECTION}price.tsv" \
---path-img-queries "${PATH_QUERY}img_embeds.tsv" \
---path-text-queries "${PATH_QUERY}rec_embeds.tsv" \
---path-query-filter "${PATH_QUERY}price.tsv" \
---path-results "${PATH_RESULT}q5.tsv" \
---start-line 0 \
---end-line 10000
+# python get_multi_dense_exact_result.py \
+# --filter 'number' \
+# --k 50 \
+# --log-frequency 100 \
+# --path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
+# --path-text-embeddings "${PATH_COLLECTION}rec_embeds.tsv" \
+# --path-number-data "${PATH_COLLECTION}price.tsv" \
+# --path-img-queries "${PATH_QUERY}img_embeds.tsv" \
+# --path-text-queries "${PATH_QUERY}rec_embeds.tsv" \
+# --path-query-filter "${PATH_QUERY}price.tsv" \
+# --path-results "${PATH_RESULT}q5.tsv" \
+# --start-line 0 \
+# --end-line 10000
 
-# Q8
-python get_multi_dense_exact_result.py \
---filter 'string' \
---k 50 \
---log-frequency 100 \
---path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
---path-text-embeddings "${PATH_COLLECTION}rec_embeds.tsv" \
---path-text-data "${PATH_COLLECTION}text.tsv" \
---path-img-queries "${PATH_QUERY}img_embeds.tsv" \
---path-text-queries "${PATH_QUERY}rec_embeds.tsv" \
---path-query-filter "${PATH_QUERY}string_filter.tsv" \
---path-results "${PATH_RESULT}q8.tsv" \
---start-line 0 \
---end-line 10000
+# # Q8
+# python get_multi_dense_exact_result.py \
+# --filter 'string' \
+# --k 50 \
+# --log-frequency 100 \
+# --path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
+# --path-text-embeddings "${PATH_COLLECTION}rec_embeds.tsv" \
+# --path-text-data "${PATH_COLLECTION}text.tsv" \
+# --path-img-queries "${PATH_QUERY}img_embeds.tsv" \
+# --path-text-queries "${PATH_QUERY}rec_embeds.tsv" \
+# --path-query-filter "${PATH_QUERY}string_filter.tsv" \
+# --path-results "${PATH_RESULT}q8.tsv" \
+# --start-line 0 \
+# --end-line 10000
 
 # Q3
 # python get_dense_sparse_exact_result.py \
