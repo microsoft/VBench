@@ -234,7 +234,7 @@ if __name__ == "__main__":
     parser.add_argument('--path-query-text', type=str, default='./data/vbench/queries/text.tsv',
                         help='path to query')
     parser.add_argument('--path-query-embeds', type=str,
-                        default='./data/vbench/queries/img_embeds_query.tsv',
+                        default='./data/vbench/queries/img_embeds.tsv',
                         help='path to query embedding result')
     parser.add_argument('--inverted-index-key', type=str, default='text',
                         help='text')

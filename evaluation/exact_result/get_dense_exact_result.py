@@ -11,13 +11,13 @@ if __name__ == "__main__":
                         help='no, number, string')
     parser.add_argument('--k', type=int, default=50,
                         help='top k')
-    parser.add_argument('--path-img-embeddings', type=str, default="./data/vbench/collections/img_embeds_collection.tsv",
+    parser.add_argument('--path-img-embeddings', type=str, default="./data/vbench/collections/img_embeds.tsv",
                         help='path to img embeddings')
     parser.add_argument('--path-number-data', type=str, default="./data/vbench/collections/numbers.tsv",
                         help='path to number data')
-    parser.add_argument('--path-text-data', type=str, default="./data/vbench/collections/text_collection.tsv",
+    parser.add_argument('--path-text-data', type=str, default="./data/vbench/collections/text.tsv",
                         help='path to text data')
-    parser.add_argument('--path-img-queries', type=str, default="./data/vbench/queries/img_embeds_query.tsv",
+    parser.add_argument('--path-img-queries', type=str, default="./data/vbench/queries/img_embeds.tsv",
                         help='path to img queries')
     parser.add_argument('--path-query-filter', type=str, default="./data/vbench/queries/price.tsv",
                         help='path to queries filter')

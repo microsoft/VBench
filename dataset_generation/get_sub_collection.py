@@ -21,7 +21,7 @@ if __name__ == "__main__":
     random.seed(0)
     lines_subcollection = random.sample(list(range(SIZE_COLLECTION)), SIZE_SUBCOLLECTION)
 
-    files = ['img_embeds_collection.tsv', 'rec_embeds_collection.tsv', 'numbers.tsv', 'text.tsv']
+    files = ['img_embeds.tsv', 'rec_embeds.tsv', 'numbers.tsv', 'text.tsv']
 
     for f in files:
         with open(os.path.join(args.path_collection, f), 'r', encoding="utf8") as in_f, \

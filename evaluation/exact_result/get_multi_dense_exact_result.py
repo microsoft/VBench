@@ -12,15 +12,15 @@ if __name__ == "__main__":
                         help='no, or, and')
     parser.add_argument('--k', type=int, default=50,
                         help='top k')
-    parser.add_argument('--path-img-embeddings', type=str, default="./data/vbench/collections/img_embeds_collection.tsv",
+    parser.add_argument('--path-img-embeddings', type=str, default="./data/vbench/collections/img_embeds.tsv",
                         help='path to img embeddings')
-    parser.add_argument('--path-text-embeddings', type=str, default="./data/vbench/collections/rec_embeds_collection.tsv",
+    parser.add_argument('--path-text-embeddings', type=str, default="./data/vbench/collections/rec_embeds.tsv",
                         help='path to text embeddings')
     parser.add_argument('--path-number-data', type=str, default="./data/vbench/collections/numbers.tsv",
                         help='path to number data')
-    parser.add_argument('--path-text-data', type=str, default="./data/vbench/collections/text_collection.tsv",
+    parser.add_argument('--path-text-data', type=str, default="./data/vbench/collections/text.tsv",
                         help='path to text data')
-    parser.add_argument('--path-img-queries', type=str, default="./data/vbench/queries/img_embeds_query.tsv",
+    parser.add_argument('--path-img-queries', type=str, default="./data/vbench/queries/img_embeds.tsv",
                         help='path to img queries')
     parser.add_argument('--path-text-queries', type=str, default="./data/vbench/queries/rec_embeds_query.tsv",
                         help='path to text queries')

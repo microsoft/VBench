@@ -103,7 +103,7 @@ python get_multi_dense_exact_result.py \
 # --inverted-index-key "text" \
 # --knn-key "embeds_image" \
 # --knn-weight 50 --k 50 \
-# --path-exact-result "${PATH_RESULT}dense-sparse-top50.tsv"
+# --path-exact-result "${PATH_RESULT}q3.tsv"
 
 # # Q6
 # python get_dense_sparse_exact_result.py \
@@ -114,7 +114,7 @@ python get_multi_dense_exact_result.py \
 # --inverted-index-key "text" \
 # --knn-key "embeds_image" \
 # --knn-weight 50 --k 50 \
-# --path-exact-result "${PATH_RESULT}dense-sparse-or-top50.tsv"
+# --path-exact-result "${PATH_RESULT}q6.tsv"
 
 # # Q9
 # python get_dense_sparse_exact_result.py \
@@ -125,4 +125,4 @@ python get_multi_dense_exact_result.py \
 # --inverted-index-key "text" \
 # --knn-key "embeds_image" \
 # --knn-weight 50 --k 50 \
-# --path-exact-result "${PATH_RESULT}dense-sparse-and-top50.tsv"
+# --path-exact-result "${PATH_RESULT}q9.tsv"
