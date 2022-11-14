@@ -13,7 +13,7 @@ if __name__ == "__main__":
                         help='top k')
     parser.add_argument('--path-img-embeddings', type=str, default="./data/vbench/collections/img_embeds.tsv",
                         help='path to img embeddings')
-    parser.add_argument('--path-number-data', type=str, default="./data/vbench/collections/numbers.tsv",
+    parser.add_argument('--path-number-data', type=str, default="./data/vbench/collections/price.tsv",
                         help='path to number data')
     parser.add_argument('--path-text-data', type=str, default="./data/vbench/collections/text.tsv",
                         help='path to text data')
@@ -33,8 +33,7 @@ if __name__ == "__main__":
 
     rids = []
     im_vecs = []
-    number_ingredients = []
-    number_instructions = []
+    prices = []
     ingre = []
     instru = []
     with open(args.path_img_embeddings, 'r', encoding="utf8") as f:
@@ -50,16 +49,14 @@ if __name__ == "__main__":
     with open(args.path_number_data, 'r', encoding="utf8") as f:
         tsvreader = csv.reader(f, delimiter="\t")
         idx = 0
-        for rid, count, step in tsvreader:
+        for rid, price in tsvreader:
             idx += 1
-            number_ingredients.append(int(count))
-            number_instructions.append(int(step))
+            prices.append(int(price))
     print("Finish loading number collection.")
 
     device = torch.device('cuda:0')
     im_vecs = torch.Tensor(im_vecs).to(device)  # [N, D]
-    number_ingredients = torch.Tensor(number_ingredients).to(device).unsqueeze(0)  # [1,N]
-    number_instructions = torch.Tensor(number_instructions).to(device).unsqueeze(0)  # [1,N]
+    prices = torch.Tensor(prices).to(device).unsqueeze(0)  # [1,N]
 
     with open(args.path_img_queries, 'r', encoding="utf8") as f_query_image, \
             open(args.path_query_filter, 'r', encoding="utf8") as f_query_filter, \
@@ -76,7 +73,7 @@ if __name__ == "__main__":
             cosinesimilarity = torch.mm(img_vec.unsqueeze(0), im_vecs.transpose(0, 1))
             if args.filter == 'number':
                 price = int(filter1)
-                cosinesimilarity[number_ingredients > price] = -2
+                cosinesimilarity[prices > price] = -2
             elif args.filter == 'string':
                 ingre_bool = []
                 with open(args.path_text_data, 'r', encoding="utf8") as f:

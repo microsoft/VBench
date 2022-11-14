@@ -7,18 +7,15 @@ PATH_RESULT="./vbench/exact/"
 # PATH_RESULT="./vbench/exact/10k/"
 
 # Q1
-python get_dense_exact_result.py \
---filter 'no' \
---k 50 \
---log-frequency 100 \
---path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
---path-number-data "${PATH_COLLECTION}numbers.tsv" \
---path-text-data "${PATH_COLLECTION}text.tsv" \
---path-img-queries "${PATH_QUERY}img_embeds.tsv" \
---path-query-filter "${PATH_QUERY}price.tsv" \
---path-results "${PATH_RESULT}q1.tsv" \
---start-line 0 \
---end-line 10000
+# python get_dense_exact_result.py \
+# --filter 'no' \
+# --k 50 \
+# --log-frequency 100 \
+# --path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
+# --path-img-queries "${PATH_QUERY}img_embeds.tsv" \
+# --path-results "${PATH_RESULT}q1.tsv" \
+# --start-line 0 \
+# --end-line 10000
 
 # Q4
 python get_dense_exact_result.py \
@@ -26,8 +23,7 @@ python get_dense_exact_result.py \
 --k 50 \
 --log-frequency 100 \
 --path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
---path-number-data "${PATH_COLLECTION}numbers.tsv" \
---path-text-data "${PATH_COLLECTION}text.tsv" \
+--path-number-data "${PATH_COLLECTION}price.tsv" \
 --path-img-queries "${PATH_QUERY}img_embeds.tsv" \
 --path-query-filter "${PATH_QUERY}price.tsv" \
 --path-results "${PATH_RESULT}q4.tsv" \
@@ -40,7 +36,6 @@ python get_dense_exact_result.py \
 --k 50 \
 --log-frequency 100 \
 --path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
---path-number-data "${PATH_COLLECTION}numbers.tsv" \
 --path-text-data "${PATH_COLLECTION}text.tsv" \
 --path-img-queries "${PATH_QUERY}img_embeds.tsv" \
 --path-query-filter "${PATH_QUERY}string_filter.tsv" \
@@ -55,10 +50,8 @@ python get_multi_dense_exact_result.py \
 --log-frequency 100 \
 --path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
 --path-text-embeddings "${PATH_COLLECTION}rec_embeds.tsv" \
---path-number-data "${PATH_COLLECTION}numbers.tsv" \
---path-text-data "${PATH_COLLECTION}text.tsv" \
 --path-img-queries "${PATH_QUERY}img_embeds.tsv" \
---path-text-queries "${PATH_QUERY}rec_embeds_query.tsv" \
+--path-text-queries "${PATH_QUERY}rec_embeds.tsv" \
 --path-results "${PATH_RESULT}q2.tsv" \
 --start-line 0 \
 --end-line 10000
@@ -70,10 +63,9 @@ python get_multi_dense_exact_result.py \
 --log-frequency 100 \
 --path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
 --path-text-embeddings "${PATH_COLLECTION}rec_embeds.tsv" \
---path-number-data "${PATH_COLLECTION}numbers.tsv" \
---path-text-data "${PATH_COLLECTION}text.tsv" \
+--path-number-data "${PATH_COLLECTION}price.tsv" \
 --path-img-queries "${PATH_QUERY}img_embeds.tsv" \
---path-text-queries "${PATH_QUERY}rec_embeds_query.tsv" \
+--path-text-queries "${PATH_QUERY}rec_embeds.tsv" \
 --path-query-filter "${PATH_QUERY}price.tsv" \
 --path-results "${PATH_RESULT}q5.tsv" \
 --start-line 0 \
@@ -86,10 +78,9 @@ python get_multi_dense_exact_result.py \
 --log-frequency 100 \
 --path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
 --path-text-embeddings "${PATH_COLLECTION}rec_embeds.tsv" \
---path-number-data "${PATH_COLLECTION}numbers.tsv" \
 --path-text-data "${PATH_COLLECTION}text.tsv" \
 --path-img-queries "${PATH_QUERY}img_embeds.tsv" \
---path-text-queries "${PATH_QUERY}rec_embeds_query.tsv" \
+--path-text-queries "${PATH_QUERY}rec_embeds.tsv" \
 --path-query-filter "${PATH_QUERY}string_filter.tsv" \
 --path-results "${PATH_RESULT}q8.tsv" \
 --start-line 0 \

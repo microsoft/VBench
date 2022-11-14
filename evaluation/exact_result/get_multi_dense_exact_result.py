@@ -4,7 +4,6 @@ import argparse
 import os
 import csv
 import torch
-import re
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -39,8 +38,7 @@ if __name__ == "__main__":
     rids = []
     im_vecs = []
     instr_vecs = []
-    number_ingredients = []
-    instru_step = []
+    prices = []
     ingre = []
     instru = []
     with open(args.path_img_embeddings, 'r', encoding="utf8") as f:
@@ -65,41 +63,15 @@ if __name__ == "__main__":
     with open(args.path_number_data, 'r', encoding="utf8") as f:
         tsvreader = csv.reader(f, delimiter="\t")
         idx = 0
-        for rid, count, step in tsvreader:
+        for rid, price in tsvreader:
             idx += 1
-            number_ingredients.append(int(count))
-            instru_step.append(int(step))
+            prices.append(int(price))
     print("Finish loading number collection.")
-    
-    ingre_dict = {}
-    ingre_num = 0
-    ingre_lists = []
-
-    with open(args.path_text_data, 'r', encoding="utf8") as f:
-        tsvreader = csv.reader(f, delimiter="\t")
-        idx = 0
-        for rid, ingredient, instruction in tsvreader:
-            idx += 1
-            ingre.append(ingredient)
-            instru.append(instruction)
-            ingre_list = []
-            for x in ingredient.split(' '):
-                if x not in ingre_dict:
-                    ingre_num = ingre_num + 1
-                    ingre_dict[x] = ingre_num
-                ingre_list.append(ingre_dict[x])
-            lenth = len(ingre_list)
-            for i in range(lenth,20):
-                ingre_list.append(-1)
-            ingre_lists.append(ingre_list)
-    print("Finish loading text collection.")
 
     device = torch.device('cuda:0')
     im_vecs = torch.Tensor(im_vecs).to(device)  # [N, D]
     instr_vecs = torch.Tensor(instr_vecs).to(device)  # [N, D]
-    number_ingredients = torch.Tensor(number_ingredients).to(device).unsqueeze(0)  # [1,N]
-    instru_step = torch.Tensor(instru_step).to(device).unsqueeze(0)  # [1,N]
-    # ingre_lists = torch.Tensor(ingre_lists).to(device)
+    prices = torch.Tensor(prices).to(device).unsqueeze(0)  # [1,N]
 
     with open(args.path_img_queries, 'r', encoding="utf8") as f_query_image, \
             open(args.path_text_queries, 'r', encoding="utf8") as f_query_text, \
@@ -108,7 +80,7 @@ if __name__ == "__main__":
         query_image = csv.reader(f_query_image, delimiter="\t")
         query_text = csv.reader(f_query_text, delimiter="\t")
         query_filter = csv.reader(f_query_filter, delimiter="\t")
-        for idx, ((qid, img_vec), (_, text_vec), (_, filter1, filter2)) in enumerate(zip(query_image, query_text, query_filter)):
+        for idx, ((qid, img_vec), (_, text_vec), (_, filter1)) in enumerate(zip(query_image, query_text, query_filter)):
             if idx < args.start_line:
                 continue
             if idx > args.end_line:
@@ -119,29 +91,20 @@ if __name__ == "__main__":
             text_vec = torch.Tensor(text_vec).to(device)  # [D]
             cosinesimilarity = torch.mm(img_vec.unsqueeze(0), im_vecs.transpose(
                 0, 1)) + torch.mm(text_vec.unsqueeze(0), instr_vecs.transpose(0, 1))  # [1,D] * [D*N] = [1,N]
-            if args.filter == 'or':
-                filter1 = int(filter1)
-                filter2 = int(filter2)
-                cosinesimilarity[torch.logical_and(number_ingredients > filter1, instru_step > filter2)] = -2
-            elif args.filter == 'and':
-                if filter1 not in ingre_dict:
-                    ingre_num = ingre_num + 1
-                    ingre_dict[filter1] = ingre_num
-                if filter2 not in ingre_dict:
-                    ingre_num = ingre_num + 1
-                    ingre_dict[filter2] = ingre_num
-
-                filter1 = ingre_dict[filter1]
-                filter2 = ingre_dict[filter2]
-
+            if args.filter == 'number':
+                cosinesimilarity[prices > int(filter1)] = -2
+            elif args.filter == 'string':
                 ingre_bool = []
-                for ingre_list in ingre_lists:
-                    if (filter1 not in ingre_list) and (filter2 in ingre_list):
-                        ingre_bool.append(1)
-                    else:
-                        ingre_bool.append(0)
-                ingre_bool = torch.Tensor(ingre_bool).to(device).unsqueeze(0)
-                cosinesimilarity[torch.logical_and(ingre_bool == 0, ingre_bool == 0)] = -2
+                with open(args.path_text_data, 'r', encoding="utf8") as f:
+                    tsvreader = csv.reader(f, delimiter="\t")
+                    for _, ingredients, instructions in tsvreader:
+                        text = ingredients + instructions
+                        if filter1.replace('_', ' ') not in text:
+                            ingre_bool.append(True)
+                        else:
+                            ingre_bool.append(False)
+                ingre_bool = torch.Tensor(ingre_bool).to(device).unsqueeze(0).to(torch.bool)
+                cosinesimilarity[ingre_bool] = -2
             scores, indices = torch.topk(
                 cosinesimilarity, args.k, dim=1)  # [1, K]
 
