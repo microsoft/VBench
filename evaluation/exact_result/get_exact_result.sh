@@ -11,7 +11,7 @@ python get_dense_exact_result.py \
 --filter 'no' \
 --k 50 \
 --log-frequency 100 \
---path-img-embeddings "${PATH_COLLECTION}img_embeds_collection.tsv" \
+--path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
 --path-number-data "${PATH_COLLECTION}numbers.tsv" \
 --path-text-data "${PATH_COLLECTION}text.tsv" \
 --path-img-queries "${PATH_QUERY}img_embeds_query.tsv" \
@@ -25,7 +25,7 @@ python get_dense_exact_result.py \
 --filter 'number' \
 --k 50 \
 --log-frequency 100 \
---path-img-embeddings "${PATH_COLLECTION}img_embeds_collection.tsv" \
+--path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
 --path-number-data "${PATH_COLLECTION}numbers.tsv" \
 --path-text-data "${PATH_COLLECTION}text.tsv" \
 --path-img-queries "${PATH_QUERY}img_embeds_query.tsv" \
@@ -39,7 +39,7 @@ python get_dense_exact_result.py \
 --filter 'string' \
 --k 50 \
 --log-frequency 100 \
---path-img-embeddings "${PATH_COLLECTION}img_embeds_collection.tsv" \
+--path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
 --path-number-data "${PATH_COLLECTION}numbers.tsv" \
 --path-text-data "${PATH_COLLECTION}text.tsv" \
 --path-img-queries "${PATH_QUERY}img_embeds_query.tsv" \
@@ -53,8 +53,8 @@ python get_multi_dense_exact_result.py \
 --filter 'no' \
 --k 50 \
 --log-frequency 100 \
---path-img-embeddings "${PATH_COLLECTION}img_embeds_collection.tsv" \
---path-text-embeddings "${PATH_COLLECTION}rec_embeds_collection.tsv" \
+--path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
+--path-text-embeddings "${PATH_COLLECTION}rec_embeds.tsv" \
 --path-number-data "${PATH_COLLECTION}numbers.tsv" \
 --path-text-data "${PATH_COLLECTION}text.tsv" \
 --path-img-queries "${PATH_QUERY}img_embeds_query.tsv" \
@@ -68,8 +68,8 @@ python get_multi_dense_exact_result.py \
 --filter 'number' \
 --k 50 \
 --log-frequency 100 \
---path-img-embeddings "${PATH_COLLECTION}img_embeds_collection.tsv" \
---path-text-embeddings "${PATH_COLLECTION}rec_embeds_collection.tsv" \
+--path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
+--path-text-embeddings "${PATH_COLLECTION}rec_embeds.tsv" \
 --path-number-data "${PATH_COLLECTION}numbers.tsv" \
 --path-text-data "${PATH_COLLECTION}text.tsv" \
 --path-img-queries "${PATH_QUERY}img_embeds_query.tsv" \
@@ -84,8 +84,8 @@ python get_multi_dense_exact_result.py \
 --filter 'string' \
 --k 50 \
 --log-frequency 100 \
---path-img-embeddings "${PATH_COLLECTION}img_embeds_collection.tsv" \
---path-text-embeddings "${PATH_COLLECTION}rec_embeds_collection.tsv" \
+--path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
+--path-text-embeddings "${PATH_COLLECTION}rec_embeds.tsv" \
 --path-number-data "${PATH_COLLECTION}numbers.tsv" \
 --path-text-data "${PATH_COLLECTION}text.tsv" \
 --path-img-queries "${PATH_QUERY}img_embeds_query.tsv" \
