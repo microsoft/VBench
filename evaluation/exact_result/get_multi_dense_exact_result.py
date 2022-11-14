@@ -41,6 +41,7 @@ if __name__ == "__main__":
     prices = []
     ingre = []
     instru = []
+    texts = []
 
     device = torch.device('cuda:0')
 
@@ -75,6 +76,12 @@ if __name__ == "__main__":
                 prices.append(int(price))
             print("Finish loading number collection.")
         prices = torch.Tensor(prices).to(device).unsqueeze(0)  # [1,N]
+    elif args.filter == 'string':
+        with open(args.path_text_data, 'r', encoding="utf8") as f:
+            tsvreader = csv.reader(f, delimiter="\t")
+            for _, ingredients, instructions in tsvreader:
+                texts.append(ingredients + instructions)
+        print("Finish loading text collection.")
 
     with open(args.path_img_queries, 'r', encoding="utf8") as f_query_image, \
             open(args.path_text_queries, 'r', encoding="utf8") as f_query_text, \
@@ -97,15 +104,7 @@ if __name__ == "__main__":
             if args.filter == 'number':
                 cosinesimilarity[prices > int(filter1)] = -2
             elif args.filter == 'string':
-                ingre_bool = []
-                with open(args.path_text_data, 'r', encoding="utf8") as f:
-                    tsvreader = csv.reader(f, delimiter="\t")
-                    for _, ingredients, instructions in tsvreader:
-                        text = ingredients + instructions
-                        if filter1.replace('_', ' ') not in text:
-                            ingre_bool.append(True)
-                        else:
-                            ingre_bool.append(False)
+                ingre_bool = [filter1.replace('_', ' ') not in text for text in texts]
                 ingre_bool = torch.Tensor(ingre_bool).to(device).unsqueeze(0).to(torch.bool)
                 cosinesimilarity[ingre_bool] = -2
             scores, indices = torch.topk(
