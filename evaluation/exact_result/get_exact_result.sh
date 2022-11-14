@@ -18,17 +18,17 @@ PATH_RESULT="./vbench/exact/"
 # --end-line 10000
 
 # Q4
-python get_dense_exact_result.py \
---filter 'number' \
---k 50 \
---log-frequency 100 \
---path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
---path-number-data "${PATH_COLLECTION}price.tsv" \
---path-img-queries "${PATH_QUERY}img_embeds.tsv" \
---path-query-filter "${PATH_QUERY}price.tsv" \
---path-results "${PATH_RESULT}q4.tsv" \
---start-line 0 \
---end-line 10000
+# python get_dense_exact_result.py \
+# --filter 'number' \
+# --k 50 \
+# --log-frequency 100 \
+# --path-img-embeddings "${PATH_COLLECTION}img_embeds.tsv" \
+# --path-number-data "${PATH_COLLECTION}price.tsv" \
+# --path-img-queries "${PATH_QUERY}img_embeds.tsv" \
+# --path-query-filter "${PATH_QUERY}price.tsv" \
+# --path-results "${PATH_RESULT}q4.tsv" \
+# --start-line 0 \
+# --end-line 10000
 
 # Q7
 python get_dense_exact_result.py \

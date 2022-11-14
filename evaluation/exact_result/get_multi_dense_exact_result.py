@@ -41,6 +41,9 @@ if __name__ == "__main__":
     prices = []
     ingre = []
     instru = []
+
+    device = torch.device('cuda:0')
+
     with open(args.path_img_embeddings, 'r', encoding="utf8") as f:
         tsvreader = csv.reader(f, delimiter="\t")
         idx = 0
@@ -60,18 +63,18 @@ if __name__ == "__main__":
             instr_vecs.append(vec)
     print("Finish loading text collection.")
 
-    with open(args.path_number_data, 'r', encoding="utf8") as f:
-        tsvreader = csv.reader(f, delimiter="\t")
-        idx = 0
-        for rid, price in tsvreader:
-            idx += 1
-            prices.append(int(price))
-    print("Finish loading number collection.")
-
-    device = torch.device('cuda:0')
     im_vecs = torch.Tensor(im_vecs).to(device)  # [N, D]
     instr_vecs = torch.Tensor(instr_vecs).to(device)  # [N, D]
-    prices = torch.Tensor(prices).to(device).unsqueeze(0)  # [1,N]
+
+    if args.filter == 'number':
+        with open(args.path_number_data, 'r', encoding="utf8") as f:
+            tsvreader = csv.reader(f, delimiter="\t")
+            idx = 0
+            for rid, price in tsvreader:
+                idx += 1
+                prices.append(int(price))
+            print("Finish loading number collection.")
+        prices = torch.Tensor(prices).to(device).unsqueeze(0)  # [1,N]
 
     with open(args.path_img_queries, 'r', encoding="utf8") as f_query_image, \
             open(args.path_text_queries, 'r', encoding="utf8") as f_query_text, \
