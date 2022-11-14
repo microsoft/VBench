@@ -63,7 +63,7 @@ if __name__ == "__main__":
         with open(args.path_text_data, 'r', encoding="utf8") as f:
             tsvreader = csv.reader(f, delimiter="\t")
             for _, ingredients, instructions in tsvreader:
-                texts.append(ingredients, instructions)
+                texts.append(ingredients + instructions)
         print("Finish loading text collection.")
 
     with open(args.path_img_queries, 'r', encoding="utf8") as f_query_image, \
