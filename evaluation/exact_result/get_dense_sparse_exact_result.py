@@ -58,7 +58,7 @@ def search_query_dense_sparse(inverted_index_key, knn_key, knn_weight, query, qu
     return [(record["_source"]["itemid"], idx+1, record["_score"]) for idx, record in enumerate(res["hits"]["hits"])]
 
 
-def search_query_dense_sparse_or_filter(inverted_index_key, knn_key, knn_weight, query, query_embeds, filter1, filter2, k):
+def search_query_dense_sparse_number_filter(inverted_index_key, knn_key, knn_weight, query, query_embeds, price, k):
     """return a tuple(docid, rank, score)
     """
     url = "https://localhost:9200/recipe/_search"
@@ -103,8 +103,7 @@ def search_query_dense_sparse_or_filter(inverted_index_key, knn_key, knn_weight,
                 "filter": [{
                     "bool": {
                         "should": [
-                            {"range": {"number_ingredients": {"lte": filter1}}},
-                            {"range": {"number_instructions": {"lte": filter2}}}
+                            {"range": {"price": {"lte": price}}}
                         ]
                     }
                 }]
@@ -116,7 +115,7 @@ def search_query_dense_sparse_or_filter(inverted_index_key, knn_key, knn_weight,
     return [(record["_source"]["itemid"], idx+1, record["_score"]) for idx, record in enumerate(res["hits"]["hits"])]
 
 
-def search_query_dense_sparse_and_filter(inverted_index_key, knn_key, knn_weight, query, query_embeds, filter1, filter2, k):
+def search_query_dense_sparse_string_filter(inverted_index_key, knn_key, knn_weight, query, query_embeds, ingredient, k):
     """return a tuple(docid, rank, score)
     """
     url = "https://localhost:9200/recipe/_search"
@@ -158,11 +157,8 @@ def search_query_dense_sparse_and_filter(inverted_index_key, knn_key, knn_weight
                     }
                 ],
                 "minimum_should_match": 2,
-                "filter": {
-                    "match": {"text": filter1.replace('_', ' ')}
-                },
                 "must_not": {
-                    "match": {"text": filter2.replace('_', ' ')}
+                    "match": {"text": ingredient.replace('_', ' ')}
                 }
             }
         }
@@ -205,18 +201,17 @@ def search_queries_dense_sparse_filter(path_query_text, inverted_index_key, path
         tsvreader_filter = csv.reader(f_filter, delimiter="\t")
         tsvreader_embeds = csv.reader(f_query_embeds, delimiter="\t")
         idx = 0
-        for [qid, ingredients, instructions], [_, query_embeds], [_, filter1, filter2] in zip(tsvreader_text, tsvreader_embeds, tsvreader_filter):
+        for [qid, ingredients, instructions], [_, query_embeds], [_, filter1] in zip(tsvreader_text, tsvreader_embeds, tsvreader_filter):
             # text = ingredient.replace('_', ' ') + " " + instruction.replace('_', ' ')
             query_text = ingredients + instructions
             query_embeds = [float(ele) for ele in query_embeds[1:-1].split(', ')]
-            if filter == 'or':
+            if filter == 'number':
                 filter1 = int(filter1)
-                filter2 = int(filter2)
-                result = search_query_dense_sparse_or_filter(
-                    inverted_index_key, knn_key, knn_weight, query_text, query_embeds, filter1, filter2, k)
+                result = search_query_dense_sparse_number_filter(
+                    inverted_index_key, knn_key, knn_weight, query_text, query_embeds, filter1, k)
             else:
-                result = search_query_dense_sparse_and_filter(
-                    inverted_index_key, knn_key, knn_weight, query_text, query_embeds, filter1, filter2, k)
+                result = search_query_dense_sparse_string_filter(
+                    inverted_index_key, knn_key, knn_weight, query_text, query_embeds, filter1, k)
 
             for (rid, rank, score) in result:
                 out.write(f"{qid}\t{rid}\t{rank}\t{score}\n")

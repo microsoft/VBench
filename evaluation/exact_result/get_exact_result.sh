@@ -96,33 +96,33 @@ python get_multi_dense_exact_result.py \
 --end-line 10000
 
 # Q3
-python get_dense_sparse_exact_result.py \
---filter 'no' \
---path-query-text "${PATH_QUERY}text.tsv" \
---path-query-embeds "${PATH_QUERY}img_embeds_query.tsv" \
---inverted-index-key "text" \
---knn-key "embeds_image" \
---knn-weight 50 --k 50 \
---path-exact-result "${PATH_RESULT}dense-sparse-top50.tsv"
+# python get_dense_sparse_exact_result.py \
+# --filter 'no' \
+# --path-query-text "${PATH_QUERY}text.tsv" \
+# --path-query-embeds "${PATH_QUERY}img_embeds_query.tsv" \
+# --inverted-index-key "text" \
+# --knn-key "embeds_image" \
+# --knn-weight 50 --k 50 \
+# --path-exact-result "${PATH_RESULT}dense-sparse-top50.tsv"
 
-# Q6
-python get_dense_sparse_exact_result.py \
---filter 'number' \
---path-query-embeds "${PATH_QUERY}img_embeds_query.tsv" \
---path-query-text "${PATH_QUERY}text.tsv" \
---path-query-filter "${PATH_QUERY}price.tsv" \
---inverted-index-key "text" \
---knn-key "embeds_image" \
---knn-weight 50 --k 50 \
---path-exact-result "${PATH_RESULT}dense-sparse-or-top50.tsv"
+# # Q6
+# python get_dense_sparse_exact_result.py \
+# --filter 'number' \
+# --path-query-embeds "${PATH_QUERY}img_embeds_query.tsv" \
+# --path-query-text "${PATH_QUERY}text.tsv" \
+# --path-query-filter "${PATH_QUERY}price.tsv" \
+# --inverted-index-key "text" \
+# --knn-key "embeds_image" \
+# --knn-weight 50 --k 50 \
+# --path-exact-result "${PATH_RESULT}dense-sparse-or-top50.tsv"
 
-# Q9
-python get_dense_sparse_exact_result.py \
---filter 'string' \
---path-query-embeds "${PATH_QUERY}img_embeds_query.tsv" \
---path-query-text "${PATH_QUERY}text.tsv" \
---path-query-filter "${PATH_QUERY}string_filter.tsv" \
---inverted-index-key "text" \
---knn-key "embeds_image" \
---knn-weight 50 --k 50 \
---path-exact-result "${PATH_RESULT}dense-sparse-and-top50.tsv"
+# # Q9
+# python get_dense_sparse_exact_result.py \
+# --filter 'string' \
+# --path-query-embeds "${PATH_QUERY}img_embeds_query.tsv" \
+# --path-query-text "${PATH_QUERY}text.tsv" \
+# --path-query-filter "${PATH_QUERY}string_filter.tsv" \
+# --inverted-index-key "text" \
+# --knn-key "embeds_image" \
+# --knn-weight 50 --k 50 \
+# --path-exact-result "${PATH_RESULT}dense-sparse-and-top50.tsv"
